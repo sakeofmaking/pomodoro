@@ -96,7 +96,6 @@ menu_options = [
     'Exit',
     f'Start {timer1_min} min work timer',
     f'Start {timer2_min} min break timer',
-    'Settings'
 ]
 data_dir = os.path.dirname(os.path.abspath(__file__))
 data_file = os.path.join(data_dir, 'data.csv')
@@ -271,7 +270,6 @@ def main():
             'Exit',
             f'Start {timer1_min} min work timer',
             f'Start {timer2_min} min break timer',
-            'Settings'
         ]
         if remaining_min > 0:
             menu_options.append(f'Continue {remaining_min} min timer')
@@ -286,8 +284,6 @@ def main():
         elif user_input == '2':
             curses.wrapper(lambda stdscr: display_timer(stdscr, timer2_min, progress, False))
         elif user_input == '3':
-            display_menu('Settings not implemented yet.')
-        elif user_input == '4':
             curses.wrapper(lambda stdscr: display_timer(stdscr, remaining_min, progress))
 
 
