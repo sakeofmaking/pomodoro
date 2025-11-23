@@ -1,5 +1,17 @@
 # Pomodoro
 
 ### Description
-* CLI pomodoro app based on Windows Clock
+* TUI pomodoro app based on Windows Clock
+
+`![Pomodoro screenshot](media/pomodoro.png)`
+
+### Instructions
+TBD
+
+
+
+
+
+
+
 

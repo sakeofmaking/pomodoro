@@ -132,6 +132,7 @@ def display_timer(stdscr, duration_min, progress, work_flag=True):
     num_lines = len(split_digits[0])
     duration_sec = duration_min * 60
     end_time = datetime.now() + timedelta(seconds=duration_sec)
+    quit_flag = False
 
     while datetime.now() < end_time:
         remaining = end_time - datetime.now()  # Update remaining time
@@ -157,7 +158,8 @@ def display_timer(stdscr, duration_min, progress, work_flag=True):
 
         try:
             key = stdscr.getch()
-            if key == ord('q'):
+            if key == ord('q') or key == ord('Q'):
+                quit_flag = True
                 break
         except:
             pass
@@ -167,7 +169,7 @@ def display_timer(stdscr, duration_min, progress, work_flag=True):
     remaining_min = round(remaining.seconds / 60)
     if work_flag:
         add_to_daily_total(duration_min - remaining_min)
-    if remaining_min == 0:
+    if remaining_min == 0 and not quit_flag:
         focus_cli_window()
         curses.wrapper(flash_screen)
 
@@ -279,6 +281,10 @@ def main():
         user_input = input('>>> ')
 
         # Execute user selection
+        if user_input:
+            check_and_reset_daily_total()
+            timer1_min, timer2_min, daily_goal_min, daily_complete_min, last_reset = read_settings(data_file)
+            progress = round((daily_complete_min * 48) / daily_goal_min)  # Update progress
         if user_input == '1':
             curses.wrapper(lambda stdscr: display_timer(stdscr, timer1_min, progress, True))
         elif user_input == '2':
